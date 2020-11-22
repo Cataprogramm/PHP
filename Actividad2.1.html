@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+    <style>
+            body      {
+                text-align:center;
+            }
+            table {
+                text-align:center; 
+                width:550px; 
+                background-color: lavender;
+            }
+            table th {
+                border:thin inset; 
+                width:9%; 
+                font-size:18; 
+                font-weight:bold;
+                color:blue;
+            }
+            table td {
+                border:thin inset; 
+                height: 1em;
+                width:9%;   
+            }
+            .cabecera {
+                font-weight:bold;
+                color:maroon;
+            }
+            .valores{
+                font-weight:bold;
+                color:maroon;
+            }            
+        </style>
+    </head>
+    <body>
+	<?php
+	//Ejercicio 1
+	$codigo_error = error_reporting(E_ERROR );
+	$a = 5;
+	$b = 1.5;
+	$c = "hola";
+	$d = true;
+	$e = null;
+	echo "<table><tr><td></td><td colspan=\"2\">Operaciones</td></tr>";
+	echo "<tr><td>valores</td><td>a+b</td><td>a.b</td><td>a>b</td>";
+	echo "<tr><td>a=$a,b=$b</td><td>"
+	$res = $a+$b;
+	echo $res."</td><td>"
+	$res = $a.$b;
+	echo $res."</td><td>"
+	$res = $a>$b;
+	echo $res."</td></tr>";
+	
+		echo "<tr><td>a=$a,b=$c</td><td>"
+	$res = $a+$c;
+	echo $res."</td><td>"
+	$res = $a.$c;
+	echo $res."</td><td>"
+	$res = $a>$c;
+	echo $res."</td></tr>";
+	
+		echo "<tr><td>a=$a,b=$d</td><td>"
+	$res = $a+$d;
+	echo $res."</td><td>"
+	$res = $a.$d;
+	echo $res."</td><td>"
+	$res = $a>$d;
+	echo $res."</td></tr>";
+	
+		echo "<tr><td>a=$a,b=$e</td><td>"
+	$res = $a+$e;
+	echo $res."</td><td>"
+	$res = $a.$e;
+	echo $res."</td><td>"
+	$res = $a>$e;
+	echo $res."</td></tr>";
+	
+		echo "<tr><td>a=$c,b=$d</td><td>"
+	$res = $c+$d;
+	echo $res."</td><td>"
+	$res = $c.$d;
+	echo $res."</td><td>"
+	$res = $c>$d;
+	echo $res."</td></tr>";
+	
+		echo "<tr><td>a=$c,b=$e</td><td>"
+	$res = $c+$e;
+	echo $res."</td><td>"
+	$res = $c.$e;
+	echo $res."</td><td>"
+	$res = $c>$e;
+	echo $res."</td></tr>";
+	
+		echo "<tr><td>a=$d,b=$e</td><td>"
+	$res = $d+$e;
+	echo $res."</td><td>"
+	$res = $d.$e;
+	echo $res."</td><td>"
+	$res = $d>$e;
+	echo $res."</td></tr>";
+	echo "</table>";
+?>
+ </body>
+</html>
