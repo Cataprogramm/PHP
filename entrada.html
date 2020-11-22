@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Formulario Propio</title>
+	<meta charset="UTF-8">
+	<meta name="author" content="Catalin">
+	<meta name="description" content="formulario propio">
+</head>
+<body>
+	<form action="salida.php" method="get">
+		<label for="textNombre">Nombre</label>
+		<input type="text" name="textNombre" id="textNombre">
+		<select name="idioma" id="selIdioma">
+			<option value="inglés">Ingl&eacute;s</option>
+			<option value="francés">Franc&eacute;s</option>
+			<option value="español">Espa&ntilde;ol</option>
+		</select>
+		
+		<label for="selAsignatura">Curso</label>
+		
+		<select name="asignaturas[]" id="selAsignatura" multiple="multiple">
+			<option value="DWES">DWES</option>
+			<option value="DWEC">DWEC</option>
+			<option value="DI">DI</option>
+		</select>
+		
+		<input type="radio" id="daw" name="curso" value="daw">
+		<label for="daw">DAW</label><br>
+		
+		<input type="radio" id="dam" name="curso" value="dam">
+		<label for="dam">DAM</label><br>
+		
+		<input type="radio" id="asir" name="curso" value="asir">
+		<label for="asir">ASIR</label><br>
+		
+		 <input type="checkbox" id="domicilio1" name="domicilio" value="Getafe">
+		 <label for="domicilio1">Vivo en Getafe</label><br>
+		 <input type="checkbox" id="domicilio2" name="domicilio" value="Usera">
+		 <label for="domicilio2">Vivo en Usera</label><br>
+		 <input type="checkbox" id="domicilio3" name="domicilio" value="Parla">
+		 <label for="domicilio3">Vivo en Parla</label><br><br>
+		 
+		 <label for="username">Username:</label><br>
+		 <input type="text" id="username" name="username"><br>
+		 <label for="pwd">Password:</label><br>
+		 <input type="password" id="pwd" name="pwd">
+		 
+		 <label for="cumpleaños">Cumpleaños:</label>
+		 <input type="date" id="cumpleaños" name="cumpleaños">
+		 
+		 <label for="años_estudio">Cantidad (entre 1 and 12):</label>
+		 <input type="number" id="años_estudio" name="años_estudio" min="1" max="12">
+
+		<input type="submit"/>
+	</form>
+</body>	
+</html>
