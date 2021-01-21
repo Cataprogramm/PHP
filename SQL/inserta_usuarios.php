@@ -9,7 +9,7 @@ if(!$con->set_charset("utf8")){
 	exit("Ha fallado establecer el charset");
 }
 //Realizar la consulta
-$usuario=$con -> real_escape_string('Alex');
+$usuario=$con -> real_escape_string('Domingo9');
 $clave=$con -> real_escape_string('Nohay2sin3');
 $sentencia = "insert into usuarios values('$usuario','$clave')";
 echo $sentencia;
