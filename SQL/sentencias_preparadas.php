@@ -1,34 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Consulta preparada</title>
+	<meta charset="UTF8">
+	<meta name="description" content="Consulta">
+	<meta name="author" content="Catalin Mazarache">
+<!--Crear  una página php para insertar 3 usuarios en la tabla dwes.usuarios, utilizando consultas preparadas.
+
+Usar: prepare y bind_param
+
+Mejora:
+
+- Utilizar un usuario limitado.
+
+- Realizar control de errores.
+
+Notas:
+
+Tener en cuenta que nuestra tabla tiene clave primaria, por tanto conviene que borres los usuarios que vas a insertar antes de ejecutar la página. 
+
+Si os resulta más cómo los podéis borrar dentro de la página php.
+-->
+</head>
+<body>
+
 
 <?php
 
-//Conexión
-$conexion=new mysqli("localhost","root","","dwes");
+//1. CONEXIÓN
+$conexion=new mysqli("localhost","alumno","1234","dwes");
 
+//Comprobamos que la conexión se realiza correctamente
+if($conexion->connect_errno){//$conexion->connect_errno !=0
+	exit("Se ha producido un error de conexion " . $conexion->connect_errno . $conexion->connect_error);
+}
+
+//Establecemos el charset
 if(!$conexion->set_charset("utf8")){
-	exit("Ha fallado establecer el charset");
-}
-//Comprobar la conexion
-if($conexion->connect_errno !=0){
-	echo "No se ha podido establecer la conexión " . $conexion->connect_error;
-}
-if(!($orden=$conexion->prepare("INSERT into USUARIOS VALUES(?,?)"))){
-	echo "Fallo la preparación: " . $conexion->errno . "-" . $conexion->error;
-}
-//Sentencia parametrizada: etapa 2 vinculación y ejecución
-$y=array('Cata','Alex','Juan');
-$x=0; $z=$y[$x];
-if (!$orden->bind_param("is",$x,$z)){
-	echo "Fallo la vinculación de parámetros: " . $orden->errno . "-" . $orden->error;
+	exit("Ha fallado al establecer el charset");
 }
 
-for($x=0;$x<3;$x++){
-	for($z=$y[$x];$z<3;$z++){
-		if(!$orden->execute()){
-			echo "Fallo la ejecución: " . $orden->errno . "-" . $orden->error;
-		}
+//Borramos los datos de los usuarios para que no existan usuarios duplicados
+if(!$conexion->query("DELETE FROM USUARIOS")){
+	exit("Error en el borrado de datos " . $conexion->errno . "-" . $conexion->error);	
+}
+//2. PREPARAMOS LAS SENTENCIAS
+if(!$orden=$conexion->prepare("INSERT INTO usuarios VALUES(?,?)")){
+	exit("Error en el prepare " . $conexion->errno . "-" .$conexion->error);
+}
+$nuevos_usuarios=array('pepe' => '1234', 'laura'=>'1234', 'ana'=>'Nohay2sin3');
+$login=$clave='';
+
+//3. VINCULAR LOS PARÁMETROS
+if(!$orden->bind_param("ss",$login,$clave)){
+	exit("Error al vincular los parámetros");
+}
+
+//4. REALIZAR EL ALTA DE USUARIOS
+echo "Alta de usuarios en la base de datos <br>";
+foreach($nuevos_usuarios as $login => $clave){
+	if(!$orden->execute()){
+		echo "Error al insertar: " . $orden->errno . "-" . $orden->error;
 	}
-
+	else if($orden->affected_rows>0){
+		echo "El usuario $login ha sido insertado con éxito <br>";
+	}
+	
 }
-$orden->close();
+//5. CERRAMOS LA CONEXIÓN
 $conexion->close();
 ?>
+</body>
+</html>

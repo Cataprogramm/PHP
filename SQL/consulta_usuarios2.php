@@ -16,19 +16,23 @@ echo "Número de filas que han sido afectadas: " . $con->affected_rows;
 echo '<br> <pre>';
 if($consulta){
 	
-	//while($ob=$consulta->fetch_row()){//Me muestra un array enumerado([0]=>Alex)
-	//while($ob=$consulta->fetch_assoc()){//Me muestra un array asociativo([login]=>Alex)	
+	/*while($ob=$consulta->fetch_row()){//Me muestra un array enumerado([0]=>Alex)
+		print_r($ob);
+	}*/
+	while($ob=$consulta->fetch_assoc()){//Me muestra un array asociativo([login]=>Alex)	
+		print_r($ob);
+	}
 	/*while($ob=$consulta->fetch_all(MYSQLI_ASSOC)){
 	
 	
 		print_r($ob);//Mostrarlo con una lista o una tabla
 
 	}*/
-	/*while($ob=$consulta->fetch_all(MYSQLI_NUM)){
+	/*while($ob=$consulta->fetch_all(MYSQLI_NUM)){//me muestra un array numérico [0]=>ana
 			print_r($ob);//Mostrarlo con una lista o una tabla
 
 	}*/
-	/*while($ob=$consulta->fetch_all(MYSQLI_BOTH)){
+	/*while($ob=$consulta->fetch_all(MYSQLI_BOTH)){//[0]=>ana [login]=>ana
 		print_r($ob);//Mostrarlo con una lista o una tabla
 
 	}*/
@@ -36,10 +40,13 @@ if($consulta){
 		print_r($ob);//Mostrarlo con una lista o una tabla
 
 	}*/
-	while($ob=$consulta->fetch_field()){//Devuelve información sobre la columna
+	
+	/*while($ob=$consulta->fetch_field()){//Devuelve información sobre la columna
 		print_r($ob);//Mostrarlo con una lista o una tabla
 
 	}
+	*/
+	
 }
 echo '</pre>';
 //Cerrar la conexión

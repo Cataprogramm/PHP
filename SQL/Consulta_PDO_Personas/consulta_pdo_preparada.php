@@ -1,10 +1,22 @@
 <?php
+/**
+Realizar una consulta PDO, con conexión persistente.
 
+A la tabla personas.
+
+Los parámetros de búsqueda son apellidos y sueldo, y deben recibirse por GET.
+
+Realizar la consulta de dos formas distintas: 
+
+1º en el execute ( pasar los valores de apellidos y sueldo).
+
+2º antes del execute, usar bindParam() y asociar los valores de apellidos y sueldo.
+*/
 //PASO 1.-CONEXION
 try{
 	$con=new PDO('mysql:host=localhost;port=3306;dbname=dwes;charset=utf8','alumno','1234',array(PDO::ATTR_PERSISTENT =>true));
 }catch(PDOException $e){
-		exit ("Fallo la conexion ".$e->getMessage());
+	exit ("Fallo la conexion ".$e->getMessage());
 }
 //PASO 2.- REALIZAR LA CONSULTA
 
@@ -14,7 +26,7 @@ if(empty($_GET['apellidos'])){
 	exit("Debe indicarse el sueldo");
 }
 
-$apellidos=$_GET['apellidos'];
+$apellidos=$_GET['apellidos'] .'%';
 $sueldo=$_GET['sueldo'];
 $sentencia="select * from personas where apellidos like :apellidos and sueldo= :sueldo";
 
@@ -22,6 +34,12 @@ $sentencia="select * from personas where apellidos like :apellidos and sueldo= :
 //PASO 4.- PREOCESAR LA CONSULTA:OBTENER RESULTADOS
 //1ª FORMA--------------------------------------------
 $consulta=$con->prepare($sentencia);
+if($consulta){
+	if($conexion->affected_rows>0){
+		echo "Se han realizado modificaciones";
+	}
+	
+}
 $consulta->execute(array(':apellidos'=>$apellidos,':sueldo'=>$sueldo));//no hay que hacer referencia a la conexion
 echo "<pre>";
 while($fila=$consulta->fetch(PDO::FETCH_ASSOC)){
@@ -30,6 +48,7 @@ while($fila=$consulta->fetch(PDO::FETCH_ASSOC)){
 	}
 }
 echo "</pre><br><br>";
+
 */
 
 //2ª FORMA--------------------------------------------
@@ -37,7 +56,9 @@ $consulta=$con->prepare($sentencia);
 $consulta->bindParam(':apellidos',$apellidos,PDO::PARAM_STR,90);
 $consulta->bindParam('sueldo',$sueldo,PDO::PARAM_INT);
 
-$consulta->execute();
+if(!$consulta->execute()){
+	die('Error en la consulta' . $consulta->errorCode() . ': ' . $consulta->errorInfo()[2]);
+}
 
 echo "<pre>";
 while($fila=$consulta->fetch(PDO::FETCH_ASSOC)){
@@ -49,7 +70,7 @@ echo "</pre><br><br>";
 
 //PASO 5.- CERRAR CONEXION
 //$con->close();//me da un error si cierro la conexión de esta forma
-//$con=NULL;
+$con=NULL;
 //unset($con);//para cerrar la conexión puedo usar el unset, el unset destruye la conexión
 
 

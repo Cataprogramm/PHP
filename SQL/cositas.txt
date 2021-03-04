@@ -1,0 +1,14 @@
+select * from usuarios limit 2;
+select * from usuarios limit 2,2;// el primero es el índice y el segundo es la cantidad de elementos/datos
+//desde la posición indicada
+select count(*) from usuarios;//me indica la cantidad de elementos de mi tabla usuarios
+
+
+FECHA
+-----------
+20210227
+'2021/03/21'
+'2021-8-6'
+
+HORA
+----------
